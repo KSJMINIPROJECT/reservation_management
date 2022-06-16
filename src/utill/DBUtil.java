@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -53,6 +54,25 @@ public class DBUtil {
 			if (stmt != null) {
 				stmt.close();
 				stmt = null;
+			}
+			if (con != null) {
+				con.close();
+				con = null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(Connection con, PreparedStatement pstmt, Statement stmt ) {
+		try {
+			if (stmt != null) {
+				stmt.close();
+				stmt = null;
+			}
+			if (pstmt != null) {
+				pstmt.close();
+				pstmt = null;
 			}
 			if (con != null) {
 				con.close();
