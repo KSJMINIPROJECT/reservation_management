@@ -12,7 +12,7 @@ public class ReservationDTO {
 	
 	public ReservationDTO() {}
 		
-	public ReservationDTO( String customerId, int roomId, Date startDate, Date endDate) {
+	public ReservationDTO( int reservationId, String customerId, int roomId, Date startDate, Date endDate) {
 		super();
 		this.customerId = customerId;
 		this.roomId = roomId;
@@ -66,6 +66,7 @@ public class ReservationDTO {
 		builder.append(startDate);
 		builder.append(", 숙박 종료 날짜 : ");
 		builder.append(endDate);
+		builder.append("]");
 		return builder.toString();
 	}
 	
