@@ -1,11 +1,14 @@
 package model;
 
 public class RoomDTO {
-	private int roomId; // ¹æ ¹øÈ£
-	private int max_Capacity; //ÃÖ´ë¼ö¿ëÀÎ¿ø
-	private String price; //°¡°İ
-	private String region; // Áö¿ª
-	private String roomStatus; //¿¹¾à°¡´É¿©ºÎ
+
+	
+
+	private int roomId; // ë°© ë²ˆí˜¸
+	private int max_Capacity; //ìµœëŒ€ìˆ˜ìš©ì¸ì›
+	private String price; //ê°€ê²©
+	private String region; // ì§€ì—­
+	private String roomStatus; //ì˜ˆì•½ê°€ëŠ¥ì—¬ë¶€
 	
 	public RoomDTO(int roomId, int max_Capacity, String price, String region, String roomStatus) {
 		super();
@@ -61,17 +64,18 @@ public class RoomDTO {
 //		return "RoomDTO [roomId=" + roomId + ", max_Capacity=" + max_Capacity + ", price=" + price + ", region="
 //				+ region + ", roomStatus=" + roomStatus + "]";
 		StringBuilder builder = new StringBuilder();
-		builder.append("[¹æ ¹øÈ£ : ");
+		builder.append("[ë°© ë²ˆí˜¸ : ");
 		builder.append(roomId);
-		builder.append(", ÃÖ´ë ¼ö¿ëÀÎ¿ø : ");
+		builder.append(", ìµœëŒ€ ìˆ˜ìš©ì¸ì› : ");
 		builder.append(max_Capacity);
-		builder.append(", °¡°İ : ");
+		builder.append(", ê°€ê²© : ");
 		builder.append(price);
-		builder.append(", Áö¿ª : ");
+		builder.append(", ì§€ì—­ : ");
 		builder.append(region);
-		builder.append(", ¿¹¾à°¡´É¿©ºÎ : ");
+		builder.append(", ì˜ˆì•½ê°€ëŠ¥ì—¬ë¶€ : ");
 		builder.append(roomStatus);
 		return builder.toString();
 	}
+
 	
 }
