@@ -1,8 +1,10 @@
 package controller;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dao.CustomerDAO;
 import model.CustomerDTO;
 import model.ReservationDTO;
 import model.RoomDTO;
@@ -11,6 +13,8 @@ public interface ControllerInterface {
 	// customer CRUD
 	// 모든 고객 정보 조회
 	public ArrayList<CustomerDTO> allCustomer();
+	
+	
 	// 특정 고객 고객ID로 조회
 	public CustomerDTO selectCustomer(String customerId);
 	// roomStatus로 빈방 조회
