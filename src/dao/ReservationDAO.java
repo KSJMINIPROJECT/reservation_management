@@ -27,7 +27,7 @@ public class ReservationDAO {
 			
 			list = new ArrayList<ReservationDTO>();
 			while(rset.next()) {
-				list.add(new ReservationDTO(rset.getInt("reservation_id"), rset.getString(2), rset.getInt(3), rset.getDate(4), rset.getDate(5) ));
+				list.add(new ReservationDTO(rset.getInt(1),rset.getString(2), rset.getInt(3), rset.getDate(4), rset.getDate(5) ));
 			}
 			
 		} finally {

@@ -43,7 +43,7 @@ public class RoomService implements RoomServiceInterface {
 	}
 
 	@Override
-	public boolean updateRoom(int roomId, int price) {
+	public boolean updateRoom(int roomId, String price) {
 		// TODO Auto-generated method stub
 		return false;
 	}

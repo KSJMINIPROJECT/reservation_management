@@ -13,6 +13,6 @@ public interface RoomServiceInterface {
 	// 날짜로 빈방 찾기
 
 	public boolean addRoom(RoomDTO newRoom);
-	public boolean updateRoom(int roomId,int price);
+	public boolean updateRoom(int roomId,String price);
 	public boolean deleteRoom(int roomId);
 }
