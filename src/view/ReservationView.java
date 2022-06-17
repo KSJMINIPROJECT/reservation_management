@@ -1,16 +1,21 @@
 package view;
 
+import java.sql.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import controller.Controller;
+import model.ReservationDTO;
+
 public class ReservationView {
 	public static boolean reservationView() throws InputMismatchException {
+			Controller controller = Controller.getInstance();
 			Scanner scan = new Scanner(System.in);
 			int roomId;
 			int reservationId;
 			String customerId;
-			String startDate;
-			String endDate;
+			Date startDate;
+			Date endDate;
 			int selectNum =0;
 			boolean check =true;
 			do {
@@ -27,13 +32,13 @@ public class ReservationView {
 				switch (selectNum) {
 				case 1:
 					System.out.println("전체 예약 리스트");
-//					Controller.allReservation();
+					controller.allReservation();
 					check =false;
 					break;
 				case 2:
 					System.out.print("고객Id를 입력하세요 : ");
 					reservationId =scan.nextInt();
-//					Controller.selectReservation(reservationId);
+					controller.selectReservation(reservationId);
 					check =false;
 					break;
 				case 3:
@@ -42,11 +47,11 @@ public class ReservationView {
 					System.out.print("예약하시는 방ID를 입력하세요 : ");
 					roomId= scan.nextInt();
 					System.out.print("예약 시작일자를 입력하세요 : ");
-					startDate = scan.next();
+					startDate=java.sql.Date.valueOf(scan.next());
 					System.out.print("예약 마지막일자를 입력하세요 : ");
-					endDate = scan.next();
-//					ReservationDTO newReservation = new reservationDTO(customerId,roomId,startDate,endDate);
-//					Controller.addReservation(newReservation);
+					endDate=java.sql.Date.valueOf(scan.next());
+					ReservationDTO newReservation = new ReservationDTO(customerId,roomId,startDate,endDate);
+					controller.addReservation(newReservation);
 					check=false;
 					break;
 				case 4:
@@ -55,16 +60,16 @@ public class ReservationView {
 					System.out.print("변경할 방Id를 입력하세요 : ");
 					roomId = scan.nextInt();
 					System.out.print("변경할 시작일자를 입력하세요 : ");
-					startDate = scan.next();
+					startDate=java.sql.Date.valueOf(scan.next());
 					System.out.print("변경할 마지막일자를 입력하세요 : ");
-					endDate = scan.next();
-//					Controller.updateReservation(reservationId,startDate,endDate);
+					endDate=java.sql.Date.valueOf(scan.next());
+					controller.updateReservation(reservationId,startDate,endDate);
 					check =false;
 					break;
 				case 5:
 					System.out.print("삭제할 예약Id 입력 : ");
 					reservationId =scan.nextInt();
-//					Controller.deleteReservation(reservationId);
+					controller.deleteReservation(reservationId);
 					check =false;
 					break;
 				case 6:

@@ -50,17 +50,4 @@ public class RoomService implements RoomServiceInterface {
 		return RoomDAO.deleteRoom(roomId);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

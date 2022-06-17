@@ -3,8 +3,12 @@ package view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import controller.Controller;
+import model.RoomDTO;
+
 public class RoomView {
 	public static boolean roomView() throws InputMismatchException{
+		Controller controller = Controller.getInstance();
 		Scanner scan = new Scanner(System.in);
 		int roomId;
 		int maxCapacity;
@@ -28,31 +32,33 @@ public class RoomView {
 			switch (selectNum) {
 			case 1:
 				System.out.println("전체 객실 리스트");
-//				Controller.allRoom();
+				controller.allRoom();
 				check =false;
 				break;
 			case 2:
 				System.out.print("객실ID를 입력하세요 : ");
 				roomId =scan.nextInt();
-//				Controller.selectRoom(roomId);
+				controller.selectRoom(roomId);
 				check =false;
 				break;
 			case 3:
 				System.out.print("조회하실 날짜를 입력하세요 : ");
 				date = scan.next();
+				// 보류
 //				controller.selectEmptyRoom(date);
 				
 			case 4:
 				System.out.print("객실의 ID를 입력하세요 : ");
 				roomId = scan.nextInt();
+				controller.selectRoom(roomId);
 				System.out.print("객실의 최대 수용 인원을 입력하세요 : ");
 				maxCapacity = scan.nextInt();
 				System.out.print("객실의 가격을 입력하세요 : ");
 				price = scan.next();
 				System.out.print("객실의 지역을 입력하세요 : ");
 				region = scan.next();
-//				RoomDTO newRoom = new RoomDTO(roomId,maxCapacity,price,region);
-//				Controller.addRoom(newRoom);
+				RoomDTO newRoom = new RoomDTO(roomId,maxCapacity,price,region);
+				controller.addRoom(newRoom);
 				check=false;
 				break;
 			case 5:
@@ -60,13 +66,13 @@ public class RoomView {
 				roomId =scan.nextInt();
 				System.out.print("수정할 객실의 가격을 입력하세요 : ");
 				price = scan.next();
-//				Controller.updateRoom(customerId,price);
+				controller.updateRoom(roomId,price);
 				check =false;
 				break;
 			case 6:
 				System.out.print("삭제할 객실Id 입력 : ");
 				roomId =scan.nextInt();
-//				Controller.deleteRoom(roomId);
+				controller.deleteRoom(roomId);
 				check =false;
 				break;
 			case 7:
