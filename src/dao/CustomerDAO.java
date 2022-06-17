@@ -18,10 +18,9 @@ public class CustomerDAO {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement("insert into customer values(?,?,?,?)");
 			pstmt.setString(1, customer.getCustomerId());
-			pstmt.setString(2, customer.getCustomerName());
-			pstmt.setInt(3, customer.getHeadCount());
+			pstmt.setInt(2, customer.getHeadCount());
+			pstmt.setString(3, customer.getCustomerName());
 			pstmt.setString(4, customer.getPhoneNumber());
-			
 			int result = pstmt.executeUpdate();
 			if(result == 1){
 				return true;
@@ -93,7 +92,7 @@ public class CustomerDAO {
 			
 			list = new ArrayList<CustomerDTO>();
 			while(rset.next()) {
-				list.add(new CustomerDTO(rset.getString(1), rset.getNString(2), rset.getInt(3), rset.getString(4)));
+				list.add(new CustomerDTO(rset.getString(1), rset.getInt(2), rset.getString(3), rset.getString(4)));
 			}
 		}
 		finally {
@@ -118,7 +117,7 @@ public class CustomerDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				Customer = new CustomerDTO(rset.getString(1), rset.getString(2), rset.getInt(3), rset.getString(4));
+				Customer = new CustomerDTO(rset.getString(1), rset.getInt(2), rset.getString(3), rset.getString(4));
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -130,5 +129,7 @@ public class CustomerDAO {
 		return Customer;
 		
 	}
+
+	
 }
 

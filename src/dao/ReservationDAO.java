@@ -27,7 +27,7 @@ public class ReservationDAO {
 			
 			list = new ArrayList<ReservationDTO>();
 			while(rset.next()) {
-				list.add(new ReservationDTO( rset.getString(1), rset.getInt(2), rset.getDate(3), rset.getDate(4) ));
+				list.add(new ReservationDTO(rset.getInt("reservation_id"), rset.getString(2), rset.getInt(3), rset.getDate(4), rset.getDate(5) ));
 			}
 			
 		} finally {
@@ -50,8 +50,8 @@ public class ReservationDAO {
 			pstmt.setInt(1, reservationId);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
-				reservation_info = new ReservationDTO(rset.getString(1), rset.getInt(2), rset.getDate(3),
-						rset.getDate(4));
+				reservation_info = new ReservationDTO(rset.getInt(1), rset.getString(2), rset.getInt(3), rset.getDate(4),
+						rset.getDate(5));
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -66,7 +66,7 @@ public class ReservationDAO {
 		PreparedStatement pstmt = null;
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("insert into bt_project values(?, ?, ?, ?)");
+			pstmt = con.prepareStatement("insert into (customer_id, room_id, start_date, end_date) bt_project values(?, ?, ?, ?)");
 			
 			pstmt.setString(1, newReservation.getCustomerId());
 			pstmt.setInt(2, newReservation.getRoomId());

@@ -6,9 +6,8 @@ public class CustomerDTO {
 	private String customerName;
 	private String phoneNumber;
 	
-public CustomerDTO() {}
 
-public CustomerDTO(String customerId, String customerName, int headCount,  String phoneNumber) {
+public CustomerDTO(String customerId,  int headCount, String customerName,  String phoneNumber) {
 	super();
 	this.customerId = customerId;
 	this.headCount = headCount;
@@ -58,7 +57,7 @@ public String toString() {
 	builder.append(", 고객 이름 : ");
 	builder.append(customerName);
 	builder.append(", 최대 인원 : ");
-	builder.append(customerId);
+	builder.append(headCount);
 	builder.append(", 고객 연락처 : ");
 	builder.append(phoneNumber);
 	return builder.toString();
