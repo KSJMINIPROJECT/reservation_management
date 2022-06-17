@@ -19,57 +19,35 @@ public class RoomService implements RoomServiceInterface {
 		return instance;
 	}
 	
-	//객실을 찾을 수 없을때
-	public boolean notExistRoom(int roomId) throws SQLException {
-		RoomDTO checkRoom = RoomDAO.selectRoom(roomId);
-		if (checkRoom == null) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-
 	//모든 객실 정보 반환
 	public ArrayList<RoomDTO> allRoom() throws SQLException {
 		return RoomDAO.allRoom();
 	};
 	
 	//객실 이름으로 검색 selectRoom
-	public RoomDTO selectRoom(int roomId) throws SQLException {
-		return RoomDAO.selectRoom(roomId);
-	}
+	public RoomDTO selectRoom(int roomId) throws SQLException, NotExistException {
+		RoomDTO room=RoomDAO.selectRoom(roomId);
+	      if(room == null) {
+	         throw new NotExistException();
+	      }
+	      return room;
+	   }
 	
 	//객실 추가하기 add
-	public boolean addRoom(RoomDTO newRoom) throws SQLException, NotExistException {
-		if(notExistRoom(newRoom.getRoomId())) {
-			RoomDAO.addRoom(newRoom);
-			return true;
-		}else {
-			throw new NotExistException("이미 있는 객실ID입니다.");
-		}
+	public boolean addRoom(RoomDTO newRoom) throws SQLException {
+		return RoomDAO.addRoom(newRoom);
 	}
 
 	@Override
 	//객실 내용 갱신 update
-	public boolean updateRoom(int roomId, String price) throws SQLException, NotExistException {
-		if(notExistRoom(roomId)) {
-			throw new NotExistException("수정하려는 Id의 객실이 없습니다.");
-		}else {
-			RoomDAO.updateRoom(roomId, price);
-		}
-			
-		return false;
+	public boolean updateRoom(int roomId, String price) throws SQLException {
+		return RoomDAO.updateRoom(roomId, price);	
 	}
 
 	@Override
 	//객실 삭제 delete
-	public boolean deleteRoom(int roomId) throws SQLException, NotExistException {
-		if(notExistRoom(roomId)){
-			throw new NotExistException("삭제하려는 Id의 객실이 없습니다.");
-		}else {
-			RoomDAO.deleteRoom(roomId);
-		}
-		return false;
+	public boolean deleteRoom(int roomId) throws SQLException {
+		return RoomDAO.deleteRoom(roomId);
 	}
 	
 }
