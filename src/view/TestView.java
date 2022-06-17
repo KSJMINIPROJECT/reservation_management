@@ -1,5 +1,6 @@
 package view;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,7 +14,12 @@ import service.ReservationServiceInterface;
 
 public class TestView {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) {
+		String day = "2022-06-24";
+		java.sql.Date d = java.sql.Date.valueOf(day);
+		System.out.println(d);
+		
+//		new ReservationDTO("a01", 2,d ,java.sql.Date.valueOf(day));
 		try {
 			System.out.println(CustomerDAO.allCustomers());
 //			System.out.println(CustomerDAO.getCustomer("a01"));
