@@ -34,7 +34,7 @@ public interface ControllerInterface {
 	// 객실 추가
 	public boolean addRoom(RoomDTO newRoom);
 	// 객실 정보 수정
-	public boolean updateRoom(String roomId,int price);
+	public boolean updateRoom(String roomId,String price);
 	// 객실 정보 삭제
 	public boolean deleteRoom(String roomId);
 	
