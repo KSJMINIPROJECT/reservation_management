@@ -20,6 +20,14 @@ public class ReservationDTO {
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
+	
+	public ReservationDTO(  String customerId, int roomId, Date startDate, Date endDate) {
+		super();
+		this.customerId = customerId;
+		this.roomId = roomId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
 	public int getReservationId() {
 		return reservationId;
 	}
