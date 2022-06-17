@@ -12,7 +12,7 @@ import model.RoomDTO;
 public interface ControllerInterface {
 	// customer CRUD
 	// 모든 고객 정보 조회
-	public ArrayList<CustomerDTO> allCustomer();
+	public void allCustomer();
 	
 	
 	// 특정 고객 고객ID로 조회
@@ -30,13 +30,13 @@ public interface ControllerInterface {
 	// 모든 객실 정보 조회
 	public ArrayList<RoomDTO> allRoom();
 	// 특정 객실 정보 조회
-	public RoomDTO selectRoom(String roomId);
+	public RoomDTO selectRoom(int roomId);
 	// 객실 추가
 	public boolean addRoom(RoomDTO newRoom);
 	// 객실 정보 수정
-	public boolean updateRoom(String roomId,String price);
+	public boolean updateRoom(int roomId,String price);
 	// 객실 정보 삭제
-	public boolean deleteRoom(String roomId);
+	public boolean deleteRoom(int roomId);
 	
 	// Reservation CRUD
 	// 모든 예약 현황 조회
