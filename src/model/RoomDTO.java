@@ -8,7 +8,7 @@ public class RoomDTO {
 	private int max_Capacity; //최대수용인원
 	private String price; //가격
 	private String region; // 지역
-	private String roomStatus; //예약가능여부
+	private char roomStatus; //예약가능여부
 	
 	public RoomDTO(int roomId, int max_Capacity, String price, String region) {
 		super();
@@ -16,6 +16,7 @@ public class RoomDTO {
 		this.max_Capacity = max_Capacity;
 		this.price = price;
 		this.region = region;
+		roomStatus = 'N';
 		
 	}
 
@@ -51,11 +52,11 @@ public class RoomDTO {
 		this.region = region;
 	}
 
-	public String getRoomStatus() {
+	public char getRoomStatus() {
 		return roomStatus;
 	}
 
-	public void setRoomStatus(String roomStatus) {
+	public void setRoomStatus(char roomStatus) {
 		this.roomStatus = roomStatus;
 	}
 
