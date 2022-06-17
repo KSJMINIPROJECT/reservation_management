@@ -13,7 +13,7 @@ import service.ReservationServiceInterface;
 
 public class TestView {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		try {
 			System.out.println(CustomerDAO.allCustomers());
 //			System.out.println(CustomerDAO.getCustomer("a01"));
@@ -25,7 +25,9 @@ public class TestView {
 //			System.out.println(RoomDAO.allRoom());
 			System.out.println(RoomDAO.selectRoom(1));
 //			System.out.println(RoomDAO.addRoom(new RoomDTO(10,5,"50,000","asd")));
-			// TODO Auto-generated catch block
+		System.out.println(ReservationDAO.deleteReservation(1));
+		}catch(Exception e) {
+		// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

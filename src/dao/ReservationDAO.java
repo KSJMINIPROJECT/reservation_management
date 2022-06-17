@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import exception.NotExistException;
 import model.ReservationDTO;
 import model.RoomDTO;
 import utill.DBUtil;
