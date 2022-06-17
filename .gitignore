@@ -25,3 +25,6 @@ hs_err_pid*
 # db.properties
 db.properties
 /bin/
+
+#classpath
+.classpath
