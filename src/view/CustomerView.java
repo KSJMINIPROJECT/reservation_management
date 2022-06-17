@@ -3,8 +3,13 @@ package view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import controller.Controller;
+import model.CustomerDTO;
+
 public class CustomerView {
+	
 	public static boolean customerView() throws InputMismatchException {
+		Controller controller = Controller.getInstance();
 		Scanner scan = new Scanner(System.in);
 		String customerId;
 		String phoneNum;
@@ -26,13 +31,13 @@ public class CustomerView {
 			switch (selectNum) {
 			case 1:
 				System.out.println("전체 고객 리스트");
-//				Controller.allCustomer();
+				controller.allCustomer();
 				check =false;
 				break;
 			case 2:
 				System.out.print("고객Id를 입력하세요(String) : ");
 				customerId =scan.next();
-//				Controller.selectCustomer(customerId);
+				controller.selectCustomer(customerId);
 				check =false;
 				break;
 			case 3:
@@ -44,8 +49,8 @@ public class CustomerView {
 				phoneNum = scan.next();
 				System.out.print("이름을 입력하세요 : ");
 				customerName = scan.next();
-//				CustomerDTO newCustomer = new customerDTO(customerId,customerName,headCount,phoneNum);
-//				Controller.addCustomer(newCustomer);
+				CustomerDTO newCustomer = new CustomerDTO(customerId,headCount,customerName,phoneNum);
+				controller.addCustomer(newCustomer);
 				check=false;
 				break;
 			case 4:
@@ -53,17 +58,15 @@ public class CustomerView {
 				customerId =scan.next();
 				System.out.print("변경할 고객 인원을 입력하세요 : ");
 				headCount = scan.nextInt();
-				System.out.print("변경할 고객 인원을 입력하세요 : ");
-				headCount = scan.nextInt();
 				System.out.print("변경할 고객의 전화번호를 입력하세요 : ");
 				phoneNum = scan.next();
-//				Controller.updateCustomer(customerId,headCount,phoneNum);
+				controller.updateCustomer(customerId,headCount,phoneNum);
 				check =false;
 				break;
 			case 5:
 				System.out.print("삭제할 고객Id 입력(String) : ");
 				customerId =scan.next();
-//				Controller.deleteCustomer(customerId);
+				controller.deleteCustomer(customerId);
 				check =false;
 				break;
 			case 6:

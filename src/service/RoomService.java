@@ -72,17 +72,4 @@ public class RoomService implements RoomServiceInterface {
 		return false;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

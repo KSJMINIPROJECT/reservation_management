@@ -15,7 +15,7 @@ public class CustomerService implements CustomerServiceInterface{
 	public static CustomerService getInstance() {
 		return instance;
 	}
-	
+	//고객 존재 여부 확인
 	public void notExistCustomer(String customerId) throws SQLException, NotExistException {
 		CustomerDTO customer = CustomerDAO.selectCustomer(customerId);
 		if(customer == null) {
@@ -24,18 +24,21 @@ public class CustomerService implements CustomerServiceInterface{
 	}
 	
 	//새로운 고객 저장
+	// 만약 아이디가 겹친다면?
 	@Override
 	public boolean addCustomer(CustomerDTO newCustomer) throws SQLException {
 		return CustomerDAO.addCustomer(newCustomer);
 	}
 	
 	//기존 고객 정보 수정
+	// 만약 아이디가 없다면?
 	@Override
 	public boolean updateCustomer(String customerId, int headCount, String phoneNum) throws SQLException, NotExistException {
 		notExistCustomer(customerId);
 		return CustomerDAO.updateCustomer(customerId, headCount, phoneNum);
 	}
-
+	// 고객 정보 삭제
+	// 만약 아이디가
 	@Override
 	public boolean deleteCustomer(String customerId) throws SQLException, NotExistException {
 		notExistCustomer(customerId);

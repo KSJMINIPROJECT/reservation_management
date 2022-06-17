@@ -16,41 +16,41 @@ public interface ControllerInterface {
 	
 	
 	// 특정 고객 고객ID로 조회
-	public CustomerDTO selectCustomer(String customerId);
-	// roomStatus로 빈방 조회
-	public ArrayList<RoomDTO> selectEmptyRoom(Date date);
+	public void selectCustomer(String customerId);
 	// 고객 추가
-	public boolean addCustomer(CustomerDTO newCustomer);
+	public void addCustomer(CustomerDTO newCustomer);
 	// 고객 정보 수정(인원,전화번호)
-	public boolean updateCustomer(String customerId,int headCount,String phoneNum);
+	public void updateCustomer(String customerId,int headCount,String phoneNum);
 	// 고객 정보 삭제
-	public boolean deleteCustomer(String customerId);
+	public void deleteCustomer(String customerId);
 	
 	// Room CRUD
 	// 모든 객실 정보 조회
-	public ArrayList<RoomDTO> allRoom();
+	public void allRoom();
 	// 특정 객실 정보 조회
-	public RoomDTO selectRoom(int roomId);
+	public void selectRoom(int roomId);
 	// 객실 추가
-	public boolean addRoom(RoomDTO newRoom);
+	public void addRoom(RoomDTO newRoom);
 	// 객실 정보 수정
-	public boolean updateRoom(int roomId,String price);
+	public void updateRoom(int roomId,String price);
 	// 객실 정보 삭제
-	public boolean deleteRoom(int roomId);
+	public void deleteRoom(int roomId);
 	
 	// Reservation CRUD
 	// 모든 예약 현황 조회
-	public ArrayList<ReservationDTO> allReservation();
+	public void allReservation();
 	// 특정 예약 현황 조회
-	public ReservationDTO selectReservation(String reservationId);
+	public void selectReservation(int reservationId);
 	// 예약 추가
-	public boolean addReservation(ReservationDTO newReservation);
+	public void addReservation(ReservationDTO newReservation);
 	// 에약 정보 수정
-	public boolean updateReservation(String reservationId,String startDate,String endDate);
+	public void updateReservation(int reservationId,Date startDate,Date endDate);
 	// 예약 정보 삭제
-	public boolean deleteReservation(String reservationId);
+	public void deleteReservation(int reservationId);
 	
 	
+	// roomStatus로 빈방 조회
+	public ArrayList<RoomDTO> selectEmptyRoom(Date date);
 	
 	
 }
