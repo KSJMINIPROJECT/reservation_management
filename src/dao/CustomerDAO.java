@@ -103,7 +103,7 @@ public class CustomerDAO {
 	
 	
 	//id로 해당 고객의 모든 정보 반환
-	public static CustomerDTO getCustomer(String customerId) throws SQLException {
+	public static CustomerDTO selectCustomer(String customerId) throws SQLException {
 		Connection con= null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
