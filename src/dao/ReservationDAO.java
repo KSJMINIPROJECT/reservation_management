@@ -86,14 +86,14 @@ public class ReservationDAO {
 	}
 	
 	//예약 삭제
-	public boolean deleteReservation(String reservationId) throws SQLException {
+	public static boolean deleteReservation(int reservationId) throws SQLException {
 	      
         Connection con = null;
         PreparedStatement pstmt = null;
      try {
         con = DBUtil.getConnection();
         pstmt = con.prepareStatement("delete from reservation where reservation_id=?");
-        pstmt.setString(1, reservationId);
+        pstmt.setInt(1, reservationId);
         
         
         int result = pstmt.executeUpdate();
@@ -106,4 +106,28 @@ public class ReservationDAO {
      }
      return false;
   }
+	
+	//예약 수정
+	public static boolean updateReservation(int reservationId,int roomId, String startDate,String endDate) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("update reservation set room_id =?, start_date = ?, end_date =? where reservation_id=? ");
+			pstmt.setInt(1, roomId);
+			pstmt.setNString(2, startDate);
+			pstmt.setString(3, endDate);
+			
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				return true;
+			}
+			
+		} finally {
+			DBUtil.close(con, pstmt);
+		}
+		
+		return false;
+		
+	}
 }

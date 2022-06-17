@@ -21,6 +21,7 @@ public class ReservationDTO {
 		this.endDate = endDate;
 	}
 	public ReservationDTO(String customerId, int roomId, Date startDate, Date endDate) {
+
 		super();
 		this.customerId = customerId;
 		this.roomId = roomId;
