@@ -79,14 +79,14 @@ public class RoomDAO {
 	
 	
 	//roomId로 price 변경하기
-	public static boolean updateRoom(int roomId, int price) throws SQLException {
+	public static boolean updateRoom(int roomId, String price) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DBUtil.getConnection();
 			
 			pstmt = con.prepareStatement("update room set price = ? where room_id=?");
-			pstmt.setInt(1, price);
+			pstmt.setString(1, price);
 			pstmt.setInt(2, roomId);
 			
 
@@ -102,13 +102,13 @@ public class RoomDAO {
 	}
 			
 		//방 삭제
-	public static boolean deleteRoom(String roomId) throws SQLException {
+	public static boolean deleteRoom(int roomId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement("delete from room where room_id=?");
-			pstmt.setString(1, roomId);
+			pstmt.setInt(1, roomId);
 			
 			int result = pstmt.executeUpdate();
 			if (result == 1) {
