@@ -10,8 +10,15 @@ import model.ReservationDTO;
 import model.RoomDTO;
 
 public class ReservationService implements ReservationServiceInterface {
+	public static ReservationService instance = new ReservationService();
 	CustomerService customer=CustomerService.getInstance();
 	RoomService room =RoomService.getInstance();
+	
+	private ReservationService(){
+	}
+	public static ReservationService getInstance() {
+		return instance;
+	}
 	
 	public void notExistReservation(int reservationId) throws SQLException, NotExistException {
 		ReservationDTO Reservation = ReservationDAO.selectReservation(reservationId);
@@ -28,7 +35,6 @@ public class ReservationService implements ReservationServiceInterface {
 	//에약 id로 특정 예약 정보 조회
 	@Override
 	public ReservationDTO selectReservation(int reservationId) throws SQLException {
-		// TODO Auto-generated method stub
 		return ReservationDAO.selectReservation(reservationId);
 	}
 	//예약 추가
@@ -43,7 +49,7 @@ public class ReservationService implements ReservationServiceInterface {
 	
 	//예약 id로 예약 정보 업데이트
 	@Override
-	public boolean updateReservation(int reservationId, int roomId, String startDate, String endDate) throws SQLException, NotExistException {
+	public boolean updateReservation(int reservationId, int roomId, Date startDate, Date endDate) throws SQLException, NotExistException {
 		notExistReservation(reservationId);
 		if(room.selectRoom(roomId)!=null) {
 			return ReservationDAO.updateReservation(reservationId, roomId, startDate, endDate);
@@ -61,7 +67,7 @@ public class ReservationService implements ReservationServiceInterface {
 	@Override
 	// 빈방 검색
 	public ArrayList<RoomDTO> selectEmptyRoom(Date date) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

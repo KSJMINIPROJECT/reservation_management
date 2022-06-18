@@ -25,7 +25,8 @@ public class RoomView {
 			System.out.println("4. 객실 정보 추가");
 			System.out.println("5. 객실 정보 수정");
 			System.out.println("6. 객실 정보 삭제");
-			System.out.println("7. 종료");
+			System.out.println("7. 뒤로가기");
+			System.out.println("8. 종료");
 			System.out.println("------------------------------------------");
 			System.out.print("번호를 입력하세요 : ");
 			selectNum = scan.nextInt();
@@ -76,6 +77,8 @@ public class RoomView {
 				check =false;
 				break;
 			case 7:
+				return true;
+			case 8:
 				return false;
 			default:
 				System.out.println("잘못된 입력값입니다. 다시 입력하세요");

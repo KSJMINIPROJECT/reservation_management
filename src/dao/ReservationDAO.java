@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.ReservationDTO;
-import model.RoomDTO;
 import utill.DBUtil;
 
 public class ReservationDAO {
@@ -108,15 +108,15 @@ public class ReservationDAO {
   }
 	
 	//예약 수정
-	public static boolean updateReservation(int reservationId,int roomId, String startDate,String endDate) throws SQLException {
+	public static boolean updateReservation(int reservationId,int roomId, Date startDate,Date endDate) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement("update reservation set room_id =?, start_date = ?, end_date =? where reservation_id=? ");
 			pstmt.setInt(1, roomId);
-			pstmt.setNString(2, startDate);
-			pstmt.setString(3, endDate);
+			pstmt.setDate(2, startDate);
+			pstmt.setDate(3, endDate);
 			
 			int result = pstmt.executeUpdate();
 			if (result == 1) {

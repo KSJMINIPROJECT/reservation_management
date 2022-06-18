@@ -16,7 +16,7 @@ public class CustomerView {
 		String customerName;
 		int selectNum =0;
 		boolean check =true;
-		int headCount = 0;
+		int headCount;
 		do {
 			System.out.println("-----------Customer_management------------");
 			System.out.println("1. 전체 고객 검색");
@@ -24,7 +24,8 @@ public class CustomerView {
 			System.out.println("3. 고객 추가");
 			System.out.println("4. 고객 정보 수정");
 			System.out.println("5. 고객 정보 삭제");
-			System.out.println("6. 종료");
+			System.out.println("6. 뒤로가기");
+			System.out.println("7. 종료");
 			System.out.println("------------------------------------------");
 			System.out.print("번호를 입력하세요 : ");
 			selectNum = scan.nextInt();
@@ -32,13 +33,11 @@ public class CustomerView {
 			case 1:
 				System.out.println("전체 고객 리스트");
 				controller.allCustomer();
-				check =false;
 				break;
 			case 2:
 				System.out.print("고객Id를 입력하세요(String) : ");
 				customerId =scan.next();
 				controller.selectCustomer(customerId);
-				check =false;
 				break;
 			case 3:
 				System.out.print("고객 Id를 입력하세요(String) : ");
@@ -51,7 +50,6 @@ public class CustomerView {
 				customerName = scan.next();
 				CustomerDTO newCustomer = new CustomerDTO(customerId,headCount,customerName,phoneNum);
 				controller.addCustomer(newCustomer);
-				check=false;
 				break;
 			case 4:
 				System.out.print("수정할 고객Id 입력(String) : ");
@@ -61,15 +59,15 @@ public class CustomerView {
 				System.out.print("변경할 고객의 전화번호를 입력하세요 : ");
 				phoneNum = scan.next();
 				controller.updateCustomer(customerId,headCount,phoneNum);
-				check =false;
 				break;
 			case 5:
 				System.out.print("삭제할 고객Id 입력(String) : ");
 				customerId =scan.next();
 				controller.deleteCustomer(customerId);
-				check =false;
 				break;
 			case 6:
+				return true;
+			case 7:
 				return false;
 			default:
 				System.out.println("잘못된 입력값입니다. 다시 입력하세요");

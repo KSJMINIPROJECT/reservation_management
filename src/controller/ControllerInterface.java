@@ -44,13 +44,13 @@ public interface ControllerInterface {
 	// 예약 추가
 	public void addReservation(ReservationDTO newReservation);
 	// 에약 정보 수정
-	public void updateReservation(int reservationId,Date startDate,Date endDate);
+	public void updateReservation(int reservationId,int roomId,Date startDate,Date endDate);
 	// 예약 정보 삭제
 	public void deleteReservation(int reservationId);
 	
 	
 	// roomStatus로 빈방 조회
-	public ArrayList<RoomDTO> selectEmptyRoom(Date date);
+	public void selectEmptyRoom(Date date);
 	
 	
 }

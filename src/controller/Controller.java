@@ -17,7 +17,7 @@ public class Controller implements ControllerInterface{
 	private static Controller instance = new Controller();
 	private CustomerService customer = CustomerService.getInstance();
 	private RoomService room = RoomService.getInstance();
-//	private ReservationService reservation = ReservationService.getInstance();
+	private ReservationService reservation = ReservationService.getInstance();
 	
 	private Controller() {}
 	
@@ -132,52 +132,50 @@ public class Controller implements ControllerInterface{
 	}
 	@Override
 	//빈방 조회 잠시 보류
-	public ArrayList<RoomDTO> selectEmptyRoom(Date date) {
-		return null;
+	public void selectEmptyRoom(Date date) {
+		EndView.printAllData(reservation.selectEmptyRoom(date));
 	}
 
 	
 	// Reservation Controller
 	@Override
 	public void allReservation() {
-//		try {
-//			EndView.printAllData(reservation.allReservation());
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			EndView.printAllData(reservation.allReservation());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void selectReservation(int reservationId) {
-//		try {
-//			EndView.printOne(reservation.selectReservation());
-//		}catch (SQLException e){
-//			e.printStackTrace();
-//		}
+		try {
+			EndView.printOne(reservation.selectReservation(reservationId));
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void addReservation(ReservationDTO newReservation) {
-//		try {
-//			reservation.addReservation(newReservation);
-//			EndView.Success("추가 성공!");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (NotExistException e) {
-//			EndView.failView(e.getMessage());
-//		}
+		try {
+			reservation.addReservation(newReservation);
+			EndView.Success("추가 성공!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void updateReservation(int reservationId, Date startDate, Date endDate) {
-//		try {
-//			reservation.updateReservation(reservationId, startDate,endDate);
-//			EndView.Success("업데이트 성공!");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (NotExistException e) {
-//			EndView.failView(e.getMessage());
-//		}
+	public void updateReservation(int reservationId,int roomId, Date startDate, Date endDate) {
+		try {
+			reservation.updateReservation(reservationId,roomId, startDate,endDate);
+			EndView.Success("업데이트 성공!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
+		}
 	}
 
 	@Override
