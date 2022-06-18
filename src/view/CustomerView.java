@@ -42,6 +42,9 @@ public class CustomerView {
 			case 3:
 				System.out.print("고객 Id를 입력하세요(String) : ");
 				customerId = scan.next();
+				if(!controller.existCustomer(customerId)) {
+					break;
+				};
 				System.out.print("고객 인원을 입력하세요 : ");
 				headCount = scan.nextInt();
 				System.out.print("휴대폰 번호를 입력하세요 : ");
@@ -54,6 +57,9 @@ public class CustomerView {
 			case 4:
 				System.out.print("수정할 고객Id 입력(String) : ");
 				customerId =scan.next();
+				if(!controller.selectCustomer(customerId)) {
+					break;
+				};
 				System.out.print("변경할 고객 인원을 입력하세요 : ");
 				headCount = scan.nextInt();
 				System.out.print("변경할 고객의 전화번호를 입력하세요 : ");

@@ -34,13 +34,11 @@ public class RoomView {
 			case 1:
 				System.out.println("전체 객실 리스트");
 				controller.allRoom();
-				check =false;
 				break;
 			case 2:
 				System.out.print("객실ID를 입력하세요 : ");
 				roomId =scan.nextInt();
 				controller.selectRoom(roomId);
-				check =false;
 				break;
 			case 3:
 				System.out.print("조회하실 날짜를 입력하세요 : ");
@@ -51,7 +49,10 @@ public class RoomView {
 			case 4:
 				System.out.print("객실의 ID를 입력하세요 : ");
 				roomId = scan.nextInt();
-				controller.selectRoom(roomId);
+				if(!controller.existRoom(roomId)) {
+					break;
+				}
+				controller.existRoom(roomId);
 				System.out.print("객실의 최대 수용 인원을 입력하세요 : ");
 				maxCapacity = scan.nextInt();
 				System.out.print("객실의 가격을 입력하세요 : ");
@@ -60,15 +61,16 @@ public class RoomView {
 				region = scan.next();
 				RoomDTO newRoom = new RoomDTO(roomId,maxCapacity,price,region);
 				controller.addRoom(newRoom);
-				check=false;
 				break;
 			case 5:
 				System.out.print("수정할 객실Id 입력하세요 : ");
 				roomId =scan.nextInt();
+				if(!controller.selectRoom(roomId)) {
+					break;
+				}
 				System.out.print("수정할 객실의 가격을 입력하세요 : ");
 				price = scan.next();
 				controller.updateRoom(roomId,price);
-				check =false;
 				break;
 			case 6:
 				System.out.print("삭제할 객실Id 입력 : ");

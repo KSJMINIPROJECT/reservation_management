@@ -15,5 +15,5 @@ public interface RoomServiceInterface {
 	
 	public boolean addRoom(RoomDTO newRoom) throws SQLException;
 	public boolean updateRoom(int roomId,String price) throws SQLException;
-	public boolean deleteRoom(int roomId) throws SQLException;
+	public boolean deleteRoom(int roomId) throws SQLException, NotExistException;
 }

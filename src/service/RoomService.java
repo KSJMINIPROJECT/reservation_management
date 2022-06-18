@@ -1,11 +1,12 @@
 package service;
 
-import java.io.NotActiveException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dao.CustomerDAO;
 import dao.RoomDAO;
 import exception.NotExistException;
+import model.CustomerDTO;
 import model.RoomDTO;
 
 public class RoomService implements RoomServiceInterface {
@@ -28,7 +29,7 @@ public class RoomService implements RoomServiceInterface {
 	public RoomDTO selectRoom(int roomId) throws SQLException, NotExistException {
 		RoomDTO room=RoomDAO.selectRoom(roomId);
 	      if(room == null) {
-	         throw new NotExistException();
+	         throw new NotExistException("존재하지않는 객실입니다.");
 	      }
 	      return room;
 	   }
@@ -46,8 +47,15 @@ public class RoomService implements RoomServiceInterface {
 
 	@Override
 	//객실 삭제 delete
-	public boolean deleteRoom(int roomId) throws SQLException {
+	public boolean deleteRoom(int roomId) throws SQLException, NotExistException {
+		selectRoom(roomId);
 		return RoomDAO.deleteRoom(roomId);
 	}
+	public void existRoom(int roomId) throws SQLException, NotExistException {
+		RoomDTO room=RoomDAO.selectRoom(roomId);
+	      if(room != null) {
+	         throw new NotExistException("이미 존재하는 객실입니다.");
+	      }
+	  }
 	
 }

@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import exception.NotExistException;
 import model.CustomerDTO;
@@ -35,12 +34,15 @@ public class Controller implements ControllerInterface{
 		}
 	}
 	@Override
-	public void selectCustomer(String customerId) {
+	public boolean selectCustomer(String customerId) {
 		try {
 			EndView.printOne(customer.selectCustomer(customerId));
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
+		}return false;
 	}
 
 	@Override
@@ -59,8 +61,6 @@ public class Controller implements ControllerInterface{
 			EndView.Success("업데이트 성공!");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NotExistException e) {
-			EndView.failView(e.getMessage());
 		}
 	}
 	@Override
@@ -74,6 +74,17 @@ public class Controller implements ControllerInterface{
 			EndView.failView(e.getMessage());
 		}
 	}
+	public boolean existCustomer(String customerId) {
+		try {
+			customer.existCustomer(customerId);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
+		}
+		return false;
+	}
 
 	// Room Controller
 	@Override
@@ -86,12 +97,16 @@ public class Controller implements ControllerInterface{
 	}
 
 	@Override
-	public void selectRoom(int roomId) {
+	public boolean selectRoom(int roomId) {
 		try {
 			EndView.printOne(room.selectRoom(roomId));
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
 		}
+		return false;
 	}
 
 	@Override
@@ -101,8 +116,6 @@ public class Controller implements ControllerInterface{
 			EndView.Success("추가 성공!");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NotExistException e) {
-			EndView.failView(e.getMessage());
 		}
 	}
 
@@ -113,8 +126,6 @@ public class Controller implements ControllerInterface{
 			EndView.Success("업데이트 성공!");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (NotExistException e) {
-			EndView.failView(e.getMessage());
 		}
 	}
 
@@ -128,7 +139,17 @@ public class Controller implements ControllerInterface{
 		} catch (NotExistException e) {
 			EndView.failView(e.getMessage());
 		}
-		
+	}
+	public boolean existRoom(int roomId) {
+		try {
+			room.existRoom(roomId);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
+		}
+		return false;
 	}
 	@Override
 	//빈방 조회 잠시 보류
@@ -148,12 +169,15 @@ public class Controller implements ControllerInterface{
 	}
 
 	@Override
-	public void selectReservation(int reservationId) {
+	public boolean selectReservation(int reservationId) {
 		try {
 			EndView.printOne(reservation.selectReservation(reservationId));
+			return true;
 		}catch (SQLException e){
 			e.printStackTrace();
-		}
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
+		} return false;
 	}
 
 	@Override
@@ -163,6 +187,8 @@ public class Controller implements ControllerInterface{
 			EndView.Success("추가 성공!");
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
 		}
 	}
 
@@ -180,14 +206,14 @@ public class Controller implements ControllerInterface{
 
 	@Override
 	public void deleteReservation(int reservationId) {
-//		try {
-//			reservation.deleteReservation(reservationId);
-//			EndView.Success("삭제 성공 !");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} catch (NotExistException e) {
-//			EndView.failView(e.getMessage());
-//		}
+		try {
+			reservation.deleteReservation(reservationId);
+			EndView.Success("삭제 성공 !");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
+		}
 	}
 
 }

@@ -3,7 +3,6 @@ package service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dao.CustomerDAO;
 import exception.NotExistException;
 import model.CustomerDTO;
 

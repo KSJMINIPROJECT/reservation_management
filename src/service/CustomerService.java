@@ -19,27 +19,20 @@ public class CustomerService implements CustomerServiceInterface{
 	
 	//새로운 고객 저장
 	@Override
-	public boolean addCustomer(CustomerDTO newCustomer) throws SQLException, NotExistException {
-		ArrayList<CustomerDTO> customer = CustomerDAO.allCustomers(); 
-		for(int i=0; i<customer.size();i++) {
-			if(newCustomer.getCustomerId().equals(customer.get(i).getCustomerId())) {
-				throw new NotExistException("새로운 고객을 추가할 수 없습니다.");
-			}
-		}
-			return CustomerDAO.addCustomer(newCustomer);
+	public boolean addCustomer(CustomerDTO newCustomer) throws SQLException{
+		return CustomerDAO.addCustomer(newCustomer);
 	}
 	
 	//기존 고객 정보 수정
 
 	@Override
-	public boolean updateCustomer(String customerId, int headCount, String phoneNum) throws SQLException, NotExistException {
-		
+	public boolean updateCustomer(String customerId, int headCount, String phoneNum) throws SQLException{
 		return CustomerDAO.updateCustomer(customerId, headCount, phoneNum);
 	}
 
 	@Override
 	public boolean deleteCustomer(String customerId) throws SQLException, NotExistException {
-		
+		selectCustomer(customerId);
 		return CustomerDAO.deleteCustomer(customerId);
 	}
 	//모든 고객 정보 반환
@@ -55,9 +48,15 @@ public class CustomerService implements CustomerServiceInterface{
 	public CustomerDTO selectCustomer(String customerId) throws SQLException, NotExistException {
 		CustomerDTO customer=CustomerDAO.selectCustomer(customerId);
 	      if(customer == null) {
-	         throw new NotExistException();
+	         throw new NotExistException("존재하지 않는 고객입니다.");
 	      }
 	      return customer;
+	  }
+	public void existCustomer(String customerId) throws SQLException, NotExistException {
+		CustomerDTO customer=CustomerDAO.selectCustomer(customerId);
+	      if(customer != null) {
+	         throw new NotExistException("이미 존재하는 고객입니다.");
+	      }
 	  }
 		
 	
