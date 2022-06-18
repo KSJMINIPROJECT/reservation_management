@@ -17,10 +17,15 @@ public class ReservationService implements ReservationServiceInterface {
 	public static ReservationService getInstance() {
 		return instance;
 	}
-	
 	CustomerService customer=CustomerService.getInstance();
 	RoomService room =RoomService.getInstance();
 	ReservationService reservation = ReservationService.getInstance();
+	
+	private ReservationService(){
+	}
+	public static ReservationService getInstance() {
+		return instance;
+	}
 	
 	public void notExistReservation(int reservationId) throws SQLException, NotExistException {
 		ReservationDTO Reservation = ReservationDAO.selectReservation(reservationId);
@@ -55,14 +60,12 @@ public class ReservationService implements ReservationServiceInterface {
 	}
 	
 	//예약 id로 예약 정보 업데이트
-	// 예약id가 없다면?
 	@Override
 	public boolean updateReservation(int reservationId, int roomId, String startDate, String endDate) throws SQLException, NotExistException {
 			return ReservationDAO.updateReservation(reservationId, roomId, startDate, endDate);
 	}
 	
 	//id로 예약 정보 삭제
-	// 예약 id가 없다면?
 	@Override
 	public boolean deleteReservation(int reservationId) throws SQLException, NotExistException {
 			return ReservationDAO.deleteReservation(reservationId);

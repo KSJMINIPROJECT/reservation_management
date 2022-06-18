@@ -25,7 +25,8 @@ public class ReservationView {
 				System.out.println("3. 예약 추가");
 				System.out.println("4. 예약 정보 수정");
 				System.out.println("5. 예약 정보 삭제");
-				System.out.println("6. 종료");
+				System.out.println("6. 뒤로가기");
+				System.out.println("7. 종료");
 				System.out.println("------------------------------------------");
 				System.out.print("번호를 입력하세요 : ");
 				selectNum = scan.nextInt();
@@ -63,7 +64,7 @@ public class ReservationView {
 					startDate=java.sql.Date.valueOf(scan.next());
 					System.out.print("변경할 마지막일자를 입력하세요 : ");
 					endDate=java.sql.Date.valueOf(scan.next());
-					controller.updateReservation(reservationId,startDate,endDate);
+					controller.updateReservation(reservationId,roomId,startDate,endDate);
 					check =false;
 					break;
 				case 5:
@@ -73,6 +74,8 @@ public class ReservationView {
 					check =false;
 					break;
 				case 6:
+					return true;
+				case 7:
 					return false;
 				default:
 					System.out.println("잘못된 입력값입니다. 다시 입력하세요");
