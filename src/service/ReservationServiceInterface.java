@@ -11,7 +11,7 @@ import model.RoomDTO;
 
 public interface ReservationServiceInterface {
 	public ArrayList<ReservationDTO> allReservation() throws SQLException;
-	public ReservationDTO selectReservation(int reservationId) throws SQLException;
+	public ReservationDTO selectReservation(int reservationId) throws SQLException, NotExistException;
 	// 예약 추가시 roomStatus 'Y'로 변경
 	public boolean addReservation(ReservationDTO newReservation) throws SQLException;
 	public boolean updateReservation(int reservationId,int roomId, Date startDate,Date endDate) throws SQLException, NotExistException;
