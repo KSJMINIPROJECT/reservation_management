@@ -4,19 +4,15 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dao.CustomerDAO;
 import dao.ReservationDAO;
 import exception.NotExistException;
+import model.CustomerDTO;
 import model.ReservationDTO;
 import model.RoomDTO;
 
 public class ReservationService implements ReservationServiceInterface {
 	private static ReservationService instance = new ReservationService();
-	
-	private ReservationService() {}
-	
-	public static ReservationService getInstance() {
-		return instance;
-	}
 	CustomerService customer=CustomerService.getInstance();
 	RoomService room =RoomService.getInstance();
 	ReservationService reservation = ReservationService.getInstance();
@@ -25,13 +21,6 @@ public class ReservationService implements ReservationServiceInterface {
 	}
 	public static ReservationService getInstance() {
 		return instance;
-	}
-	
-	public void notExistReservation(int reservationId) throws SQLException, NotExistException {
-		ReservationDTO Reservation = ReservationDAO.selectReservation(reservationId);
-		if (Reservation == null) {
-			throw new NotExistException("검색한  예약이 존재하지 않습니다.");
-		}
 	}
 	
 	//모든 예약 정보 반환
@@ -44,7 +33,7 @@ public class ReservationService implements ReservationServiceInterface {
 	public ReservationDTO selectReservation(int reservationId) throws SQLException, NotExistException {
 		ReservationDTO reservation = ReservationDAO.selectReservation(reservationId);
 		if(reservation == null) {
-			throw new NotExistException();
+			throw new NotExistException("해당하는 예약정보가 없습니다.");
 		}
 		return reservation;
 	}
@@ -61,22 +50,20 @@ public class ReservationService implements ReservationServiceInterface {
 	
 	//예약 id로 예약 정보 업데이트
 	@Override
-	public boolean updateReservation(int reservationId, int roomId, String startDate, String endDate) throws SQLException, NotExistException {
+	public boolean updateReservation(int reservationId, int roomId, Date startDate, Date endDate) throws SQLException, NotExistException {
 			return ReservationDAO.updateReservation(reservationId, roomId, startDate, endDate);
 	}
 	
 	//id로 예약 정보 삭제
 	@Override
 	public boolean deleteReservation(int reservationId) throws SQLException, NotExistException {
-			return ReservationDAO.deleteReservation(reservationId);
-	
+		selectReservation(reservationId);
+		return ReservationDAO.deleteReservation(reservationId);
 	}
 	
 	@Override
 	// 빈방 검색
 	public ArrayList<RoomDTO> selectEmptyRoom(Date date) {
-		
 		return null;
 	}
-
 }

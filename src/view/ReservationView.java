@@ -34,13 +34,11 @@ public class ReservationView {
 				case 1:
 					System.out.println("전체 예약 리스트");
 					controller.allReservation();
-					check =false;
 					break;
 				case 2:
 					System.out.print("고객Id를 입력하세요 : ");
 					reservationId =scan.nextInt();
 					controller.selectReservation(reservationId);
-					check =false;
 					break;
 				case 3:
 					System.out.print("예약하시는 고객Id를  입력하세요 : ");
@@ -53,11 +51,13 @@ public class ReservationView {
 					endDate=java.sql.Date.valueOf(scan.next());
 					ReservationDTO newReservation = new ReservationDTO(customerId,roomId,startDate,endDate);
 					controller.addReservation(newReservation);
-					check=false;
 					break;
 				case 4:
 					System.out.print("수정할 예약Id 입력 : ");
 					reservationId =scan.nextInt();
+					if(controller.selectReservation(reservationId)) {
+						break;
+					}
 					System.out.print("변경할 방Id를 입력하세요 : ");
 					roomId = scan.nextInt();
 					System.out.print("변경할 시작일자를 입력하세요 : ");
@@ -65,13 +65,11 @@ public class ReservationView {
 					System.out.print("변경할 마지막일자를 입력하세요 : ");
 					endDate=java.sql.Date.valueOf(scan.next());
 					controller.updateReservation(reservationId,roomId,startDate,endDate);
-					check =false;
 					break;
 				case 5:
 					System.out.print("삭제할 예약Id 입력 : ");
 					reservationId =scan.nextInt();
 					controller.deleteReservation(reservationId);
-					check =false;
 					break;
 				case 6:
 					return true;
