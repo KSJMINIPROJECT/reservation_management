@@ -10,7 +10,7 @@ public class CustomerView {
 	
 	public static boolean customerView() throws InputMismatchException {
 		Controller controller = Controller.getInstance();
-		Scanner scan = new Scanner(System.in);
+		Scanner scan =new Scanner(System.in);
 		String customerId;
 		String phoneNum;
 		String customerName;
