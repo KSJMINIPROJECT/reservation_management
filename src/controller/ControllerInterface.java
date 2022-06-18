@@ -51,6 +51,9 @@ public interface ControllerInterface {
 	
 	// roomStatus로 빈방 조회
 	public ArrayList<RoomDTO> selectEmptyRoom(Date date);
+
+
+	ArrayList<RoomDTO> selectEmptyRoom(String date);
 	
 	
 }

@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dao.CustomerDAO;
 import dao.ReservationDAO;
 import exception.NotExistException;
+import model.CustomerDTO;
 import model.ReservationDTO;
 import model.RoomDTO;
 
@@ -21,6 +23,7 @@ public class ReservationService implements ReservationServiceInterface {
 	CustomerService customer=CustomerService.getInstance();
 	RoomService room =RoomService.getInstance();
 	ReservationService reservation = ReservationService.getInstance();
+	
 	
 	public void notExistReservation(int reservationId) throws SQLException, NotExistException {
 		ReservationDTO Reservation = ReservationDAO.selectReservation(reservationId);
@@ -52,6 +55,8 @@ public class ReservationService implements ReservationServiceInterface {
 				}else {
 					throw new NotExistException("신규 예약 추가 할 수 없습니다.");
 				}
+		
+		
 	}
 	
 	//예약 id로 예약 정보 업데이트
@@ -71,9 +76,9 @@ public class ReservationService implements ReservationServiceInterface {
 	
 	@Override
 	// 빈방 검색
-	public ArrayList<RoomDTO> selectEmptyRoom(Date date) {
+	public ArrayList<RoomDTO> selectEmptyRoom(String date) throws SQLException {
 		
-		return null;
+		return ReservationDAO.selectEmptyRoom(date);
 	}
 
 }

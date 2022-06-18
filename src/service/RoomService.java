@@ -20,7 +20,7 @@ public class RoomService implements RoomServiceInterface {
 	}
 	
 	//모든 객실 정보 반환
-	public ArrayList<RoomDTO> allRoom() throws SQLException {
+	public ArrayList<RoomDTO> allRoom() throws SQLException, NotExistException {
 		return RoomDAO.allRoom();
 	};
 	
@@ -34,19 +34,19 @@ public class RoomService implements RoomServiceInterface {
 	   }
 	
 	//객실 추가하기 add
-	public boolean addRoom(RoomDTO newRoom) throws SQLException {
+	public boolean addRoom(RoomDTO newRoom) throws SQLException, NotExistException {
 		return RoomDAO.addRoom(newRoom);
 	}
 
 	@Override
 	//객실 내용 갱신 update
-	public boolean updateRoom(int roomId, String price) throws SQLException {
+	public boolean updateRoom(int roomId, String price) throws SQLException, NotExistException {
 		return RoomDAO.updateRoom(roomId, price);	
 	}
 
 	@Override
 	//객실 삭제 delete
-	public boolean deleteRoom(int roomId) throws SQLException {
+	public boolean deleteRoom(int roomId) throws SQLException, NotExistException {
 		return RoomDAO.deleteRoom(roomId);
 	}
 	

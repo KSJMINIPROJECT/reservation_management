@@ -37,7 +37,7 @@ public class StartView{
 				System.out.println("잘못된 입력값입니다. 다시 입력하세요");
 				break;
 			}
-		} while (check);
+		} while (check!=false);
 		}catch(InputMismatchException e) {
 			System.out.println("잘못된 타입입니다.");
 		}finally {

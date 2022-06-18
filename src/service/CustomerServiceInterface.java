@@ -8,7 +8,7 @@ import exception.NotExistException;
 import model.CustomerDTO;
 
 public interface CustomerServiceInterface {
-	public ArrayList<CustomerDTO> allCustomer() throws SQLException;
+	public ArrayList<CustomerDTO> allCustomer() throws SQLException, NotExistException;
 	public CustomerDTO selectCustomer(String customerId) throws SQLException, NotExistException;
 	
 	

@@ -45,7 +45,7 @@ public class CustomerService implements CustomerServiceInterface{
 	//모든 고객 정보 반환
 	//(만약 고객이 한명도 없다면?)
 	@Override
-	public ArrayList<CustomerDTO> allCustomer() throws SQLException {
+	public ArrayList<CustomerDTO> allCustomer() throws SQLException, NotExistException {
 		
 		return CustomerDAO.allCustomers();
 	}

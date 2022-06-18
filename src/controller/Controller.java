@@ -17,7 +17,7 @@ public class Controller implements ControllerInterface{
 	private static Controller instance = new Controller();
 	private CustomerService customer = CustomerService.getInstance();
 	private RoomService room = RoomService.getInstance();
-//	private ReservationService reservation = ReservationService.getInstance();
+	private ReservationService reservation = ReservationService.getInstance();
 	
 	private Controller() {}
 	
@@ -32,6 +32,8 @@ public class Controller implements ControllerInterface{
 			EndView.printAllData(customer.allCustomer());
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
 		}
 	}
 	@Override
@@ -40,6 +42,8 @@ public class Controller implements ControllerInterface{
 			EndView.printOne(customer.selectCustomer(customerId));
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
 		}
 	}
 
@@ -50,6 +54,8 @@ public class Controller implements ControllerInterface{
 			EndView.Success("추가 성공!");
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
 		}
 	}
 	@Override
@@ -82,6 +88,8 @@ public class Controller implements ControllerInterface{
 			EndView.printAllData(room.allRoom());
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
 		}
 	}
 
@@ -91,6 +99,8 @@ public class Controller implements ControllerInterface{
 			EndView.printOne(room.selectRoom(roomId));
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
 		}
 	}
 
@@ -132,7 +142,13 @@ public class Controller implements ControllerInterface{
 	}
 	@Override
 	//빈방 조회 잠시 보류
-	public ArrayList<RoomDTO> selectEmptyRoom(Date date) {
+	public ArrayList<RoomDTO> selectEmptyRoom(String date) {
+		try {
+			
+			EndView.printAllData(reservation.selectEmptyRoom(date));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -190,6 +206,12 @@ public class Controller implements ControllerInterface{
 //		} catch (NotExistException e) {
 //			EndView.failView(e.getMessage());
 //		}
+	}
+
+	@Override
+	public ArrayList<RoomDTO> selectEmptyRoom(Date date) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -45,8 +45,8 @@ public class RoomView {
 				System.out.print("조회하실 날짜를 입력하세요 : ");
 				date = scan.next();
 				// 보류
-//				controller.selectEmptyRoom(date);
-				
+				controller.selectEmptyRoom(date);
+				break;
 			case 4:
 				System.out.print("객실의 ID를 입력하세요 : ");
 				roomId = scan.nextInt();
