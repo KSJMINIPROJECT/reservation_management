@@ -49,12 +49,9 @@ public interface ControllerInterface {
 	// 예약 정보 삭제
 	public void deleteReservation(int reservationId);
 	
-	
-	// roomStatus로 빈방 조회
-	public void selectEmptyRoom(Date date) throws NotExistException;
+	//예약시작, 예약 종료일로 빈 방 검색
+	public void searchEmptyRoom(Date reservationStartDate, Date reservationEndDate) throws NotExistException;
 
-
-//	public void selectEmptyRoom(String date) throws NotExistException;
 
 
 	
