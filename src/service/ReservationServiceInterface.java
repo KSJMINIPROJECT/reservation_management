@@ -19,5 +19,7 @@ public interface ReservationServiceInterface {
 	public boolean deleteReservation(int reservationId) throws SQLException, NotExistException;
 	
 	//빈방 검색
-	public ArrayList<RoomDTO> selectEmptyRoom(Date date);
+	public ArrayList<RoomDTO> selectEmptyRoom(Date date) throws SQLException;
+	
+	
 }

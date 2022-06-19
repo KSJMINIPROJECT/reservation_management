@@ -153,8 +153,14 @@ public class Controller implements ControllerInterface{
 	}
 	@Override
 	//빈방 조회 잠시 보류
-	public void selectEmptyRoom(Date date) {
-		EndView.printAllData(reservation.selectEmptyRoom(date));
+	public void selectEmptyRoom(Date date) throws NotExistException {
+		try {
+			EndView.printAllData(reservation.selectEmptyRoom(date));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 
 	
