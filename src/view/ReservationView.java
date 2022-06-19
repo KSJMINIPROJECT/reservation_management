@@ -56,15 +56,16 @@ public class ReservationView {
 					System.out.print("수정할 예약Id 입력 : ");
 					reservationId =scan.nextInt();
 					if(controller.selectReservation(reservationId)) {
+						System.out.print("변경할 방Id를 입력하세요 : ");
+						roomId = scan.nextInt();
+						System.out.print("변경할 시작일자를 입력하세요 : ");
+						startDate=java.sql.Date.valueOf(scan.next());
+						System.out.print("변경할 마지막일자를 입력하세요 : ");
+						endDate=java.sql.Date.valueOf(scan.next());
+						controller.updateReservation(reservationId,roomId,startDate,endDate);
 						break;
 					}
-					System.out.print("변경할 방Id를 입력하세요 : ");
-					roomId = scan.nextInt();
-					System.out.print("변경할 시작일자를 입력하세요 : ");
-					startDate=java.sql.Date.valueOf(scan.next());
-					System.out.print("변경할 마지막일자를 입력하세요 : ");
-					endDate=java.sql.Date.valueOf(scan.next());
-					controller.updateReservation(reservationId,roomId,startDate,endDate);
+					
 					break;
 				case 5:
 					System.out.print("삭제할 예약Id 입력 : ");

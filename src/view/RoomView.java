@@ -1,20 +1,22 @@
 package view;
 
+import java.sql.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controller;
+import exception.NotExistException;
 import model.RoomDTO;
 
 public class RoomView {
-	public static boolean roomView() throws InputMismatchException{
+	public static boolean roomView() throws InputMismatchException, NotExistException{
 		Controller controller = Controller.getInstance();
 		Scanner scan = new Scanner(System.in);
 		int roomId;
 		int maxCapacity;
 		String price;
 		String region;
-		String date;
+		Date date;
 		int selectNum =0;
 		boolean check =true;
 		do {
@@ -42,9 +44,10 @@ public class RoomView {
 				break;
 			case 3:
 				System.out.print("조회하실 날짜를 입력하세요 : ");
-				date = scan.next();
+				date = java.sql.Date.valueOf(scan.next());
 				// 보류
-//				controller.selectEmptyRoom(date);
+				controller.selectEmptyRoom(date);
+				break;
 				
 			case 4:
 				System.out.print("객실의 ID를 입력하세요 : ");

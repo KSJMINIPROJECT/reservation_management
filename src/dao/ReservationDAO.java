@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import exception.NotExistException;
 import model.ReservationDTO;
+import model.RoomDTO;
 import utill.DBUtil;
 
 public class ReservationDAO {
@@ -67,7 +68,7 @@ public class ReservationDAO {
 		PreparedStatement pstmt = null;
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("insert into (customer_id, room_id, start_date, end_date) bt_project values(?, ?, ?, ?)");
+			pstmt = con.prepareStatement("insert into reservation (customer_id, room_id, start_date, end_date) values(?, ?, ?, ?)");
 			
 			pstmt.setString(1, newReservation.getCustomerId());
 			pstmt.setInt(2, newReservation.getRoomId());
@@ -114,10 +115,11 @@ public class ReservationDAO {
 		PreparedStatement pstmt = null;
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("update reservation set room_id =?, start_date = ?, end_date =? where reservation_id=? ");
+			pstmt = con.prepareStatement("update reservation set room_id =?, start_date = ?, end_date = ? where reservation_id=? ");
 			pstmt.setInt(1, roomId);
 			pstmt.setDate(2, startDate);
 			pstmt.setDate(3, endDate);
+			pstmt.setInt(4, reservationId);
 			
 			int result = pstmt.executeUpdate();
 			if (result == 1) {
@@ -131,4 +133,34 @@ public class ReservationDAO {
 		return false;
 		
 	}
+
+	public static ArrayList<RoomDTO> selectEmptyRoom(Date date) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<RoomDTO> list = null;
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("select * \r\n" + 
+					"from room \r\n" + 
+					"where room_id not in(select room_id from reservation where ? >= start_date and ? <= end_date)");
+			pstmt.setDate(1, date);
+			pstmt.setDate(2, date);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<RoomDTO>();
+			while(rset.next()) {
+				list.add(new RoomDTO(rset.getInt(1),rset.getInt(2), rset.getString(3), rset.getString(4)));
+			}
+			
+		} finally {
+			DBUtil.close(con, pstmt, rset);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
 }

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.CustomerDAO;
+import exception.NotExistException;
 import model.CustomerDTO;
 import model.ReservationDTO;
 import model.RoomDTO;
@@ -50,7 +51,12 @@ public interface ControllerInterface {
 	
 	
 	// roomStatus로 빈방 조회
-	public void selectEmptyRoom(Date date);
+	public void selectEmptyRoom(Date date) throws NotExistException;
+
+
+//	public void selectEmptyRoom(String date) throws NotExistException;
+
+
 	
 	
 }
