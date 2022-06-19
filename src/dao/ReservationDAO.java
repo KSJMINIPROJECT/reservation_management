@@ -133,8 +133,9 @@ public class ReservationDAO {
 		return false;
 		
 	}
-
-	public static ArrayList<RoomDTO> selectEmptyRoom(Date date) throws SQLException {
+	
+	//빈 방 조회
+	public static ArrayList<RoomDTO> searchEmptyRoom(Date reservationStartDate, Date reservationEndDate ) throws SQLException{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -142,10 +143,13 @@ public class ReservationDAO {
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement("select * \r\n" + 
-					"from room \r\n" + 
-					"where room_id not in(select room_id from reservation where ? >= start_date and ? <= end_date)");
-			pstmt.setDate(1, date);
-			pstmt.setDate(2, date);
+					"from room\r\n" + 
+					"where room_id not in(select room_id\r\n" + 
+					"					from reservation\r\n" + 
+					"                    where reservation.start_date <= ? \r\n" + 
+					"						and reservation.end_date >= ?) ");
+			pstmt.setDate(1, reservationEndDate);
+			pstmt.setDate(2, reservationStartDate);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<RoomDTO>();
@@ -158,7 +162,6 @@ public class ReservationDAO {
 		}
 		return list;
 	}
-	
 	
 	
 	

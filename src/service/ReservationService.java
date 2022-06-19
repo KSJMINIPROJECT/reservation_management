@@ -62,9 +62,9 @@ public class ReservationService implements ReservationServiceInterface {
 	}
 	
 	@Override
-	// 빈방 검색(하루 기준)
-	public ArrayList<RoomDTO> selectEmptyRoom(Date date) throws SQLException {
-		
-		return ReservationDAO.selectEmptyRoom(date);
+	// 빈방 검색(ㅇ)
+	
+	public ArrayList<RoomDTO> searchEmptyRoom(Date reservationStartDate, Date reservationEndDate) throws SQLException{
+		return ReservationDAO.searchEmptyRoom(reservationStartDate, reservationEndDate);
 	}
 }

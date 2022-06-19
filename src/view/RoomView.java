@@ -16,7 +16,8 @@ public class RoomView {
 		int maxCapacity;
 		String price;
 		String region;
-		Date date;
+		Date startDate;
+		Date endDate;
 		int selectNum =0;
 		boolean check =true;
 		do {
@@ -43,10 +44,11 @@ public class RoomView {
 				controller.selectRoom(roomId);
 				break;
 			case 3:
-				System.out.print("조회하실 날짜를 입력하세요 : ");
-				date = java.sql.Date.valueOf(scan.next());
-				// 보류
-				controller.selectEmptyRoom(date);
+				System.out.println("조회하실 예약 시작일을 입력하세요: ");
+				startDate = java.sql.Date.valueOf(scan.next());
+				System.out.println("조회하실 예약 종료일을 입력하세요: ");
+				endDate = java.sql.Date.valueOf(scan.next());
+				controller.searchEmptyRoom(startDate, endDate);
 				break;
 				
 			case 4:
