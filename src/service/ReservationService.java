@@ -3,11 +3,8 @@ package service;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import dao.CustomerDAO;
 import dao.ReservationDAO;
 import exception.NotExistException;
-import model.CustomerDTO;
 import model.ReservationDTO;
 import model.RoomDTO;
 
@@ -64,7 +61,25 @@ public class ReservationService implements ReservationServiceInterface {
 	@Override
 	// 빈방 검색(ㅇ)
 	
-	public ArrayList<RoomDTO> searchEmptyRoom(Date reservationStartDate, Date reservationEndDate) throws SQLException{
-		return ReservationDAO.searchEmptyRoom(reservationStartDate, reservationEndDate);
+	public ArrayList<RoomDTO> searchEmptyRoom(Date reservationStartDate, Date reservationEndDate) throws SQLException,NotExistException{
+		ArrayList<RoomDTO> emptyRoomList = ReservationDAO.searchEmptyRoom(reservationStartDate, reservationEndDate);
+		if(emptyRoomList.size() == 0) {
+			throw new NotExistException("입력하신 기간에 예약 가능한 방이 없습니다.");
+		}
+		return emptyRoomList;
+	}
+	public boolean checkEmptyRoom(Date reservationStartDate, Date reservationEndDate,int roomId) throws SQLException, NotExistException{
+		
+		if(!ReservationDAO.checkEmptyRoom(reservationStartDate, reservationEndDate,roomId)) {
+			throw new NotExistException("해당 기간에 객실 이용이 불가능합니다.");
+		}
+		return true;
+	}
+	public boolean checkHeadCount(int roomId,String customerId) throws SQLException, NotExistException {
+		if(customer.selectCustomer(customerId).getHeadCount()<=room.selectRoom(roomId).getMax_Capacity()) {
+			return true;
+		}else {
+			throw new NotExistException("객실의 최대 수용인원을 초과했습니다.");
+		}
 	}
 }

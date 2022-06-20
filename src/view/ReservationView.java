@@ -5,11 +5,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Controller;
+import model.CustomerDTO;
 import model.ReservationDTO;
+import model.RoomDTO;
+import service.ReservationService;
 
 public class ReservationView {
 	public static boolean reservationView() throws InputMismatchException {
 			Controller controller = Controller.getInstance();
+			ReservationDTO reservation = null;
 			Scanner scan = new Scanner(System.in);
 			int roomId;
 			int reservationId;
@@ -43,29 +47,46 @@ public class ReservationView {
 				case 3:
 					System.out.print("예약하시는 고객Id를  입력하세요 : ");
 					customerId = scan.next();
+					if(!controller.selectCustomer(customerId)) {
+						break;
+					}
 					System.out.print("예약하시는 방ID를 입력하세요 : ");
 					roomId= scan.nextInt();
+					if((!controller.selectRoom(roomId))||
+							(!controller.checkHeadCount(roomId, customerId))) {
+						break;
+					}
 					System.out.print("예약 시작일자를 입력하세요 : ");
 					startDate=java.sql.Date.valueOf(scan.next());
 					System.out.print("예약 마지막일자를 입력하세요 : ");
 					endDate=java.sql.Date.valueOf(scan.next());
+					if(!controller.checkEmptyRoom(startDate,endDate,roomId)) {
+						break;
+					};
 					ReservationDTO newReservation = new ReservationDTO(customerId,roomId,startDate,endDate);
 					controller.addReservation(newReservation);
 					break;
 				case 4:
 					System.out.print("수정할 예약Id 입력 : ");
 					reservationId =scan.nextInt();
-					if(controller.selectReservation(reservationId)) {
-						System.out.print("변경할 방Id를 입력하세요 : ");
-						roomId = scan.nextInt();
-						System.out.print("변경할 시작일자를 입력하세요 : ");
-						startDate=java.sql.Date.valueOf(scan.next());
-						System.out.print("변경할 마지막일자를 입력하세요 : ");
-						endDate=java.sql.Date.valueOf(scan.next());
-						controller.updateReservation(reservationId,roomId,startDate,endDate);
+					if((reservation=controller.selectReservation(reservationId)) == null) {
 						break;
 					}
-					
+					System.out.print("변경할 방Id를 입력하세요 : ");
+					roomId = scan.nextInt();
+					if((!controller.selectRoom(roomId))||
+							(!controller.checkHeadCount(roomId,reservation.getCustomerId()))) {
+						break;
+					}
+					System.out.print("변경할 시작일자를 입력하세요 : ");
+					startDate=java.sql.Date.valueOf(scan.next());
+					System.out.print("변경할 마지막일자를 입력하세요 : ");
+					endDate=java.sql.Date.valueOf(scan.next());
+					if(!controller.checkEmptyRoom(startDate,endDate,roomId)) {
+						break;
+					};
+						controller.updateReservation(reservationId,roomId,startDate,endDate);
+				
 					break;
 				case 5:
 					System.out.print("삭제할 예약Id 입력 : ");

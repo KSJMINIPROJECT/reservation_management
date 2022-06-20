@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import exception.NotExistException;
 import model.ReservationDTO;
 import model.RoomDTO;
 import utill.DBUtil;
@@ -68,7 +66,7 @@ public class ReservationDAO {
 		PreparedStatement pstmt = null;
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("insert into reservation (customer_id, room_id, start_date, end_date) values(?, ?, ?, ?)");
+			pstmt = con.prepareStatement("insert into reservation(customer_id, room_id, start_date, end_date) values(?, ?, ?, ?)");
 			
 			pstmt.setString(1, newReservation.getCustomerId());
 			pstmt.setInt(2, newReservation.getRoomId());
@@ -161,6 +159,39 @@ public class ReservationDAO {
 			DBUtil.close(con, pstmt, rset);
 		}
 		return list;
+	}
+	//roomId로 빈방인지 체크
+	public static boolean checkEmptyRoom(Date reservationStartDate, Date reservationEndDate,int roomId ) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<RoomDTO> list = null;
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("select * \r\n" + 
+					"from room\r\n" + 
+					"where room_id = ? and room_id not in(select room_id\r\n" + 
+					"					from reservation\r\n" + 
+					"                    where reservation.start_date <= ? \r\n" + 
+					"						and reservation.end_date >= ?) ");
+			pstmt.setInt(1, roomId);
+			pstmt.setDate(2, reservationEndDate);
+			pstmt.setDate(3, reservationStartDate);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<RoomDTO>();
+			if(rset.next()) {
+				list.add(new RoomDTO(rset.getInt(1),rset.getInt(2), rset.getString(3), rset.getString(4)));
+			}
+			if(list.size()==1) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		} finally {
+			DBUtil.close(con, pstmt, rset);
+		}
 	}
 	
 	

@@ -2,11 +2,8 @@ package service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import dao.CustomerDAO;
 import dao.RoomDAO;
 import exception.NotExistException;
-import model.CustomerDTO;
 import model.RoomDTO;
 
 public class RoomService implements RoomServiceInterface {

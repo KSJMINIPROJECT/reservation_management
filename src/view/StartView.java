@@ -3,10 +3,8 @@ package view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import exception.NotExistException;
-
 public class StartView{
-	public static void main(String[] args) throws NotExistException {
+	public static void main(String[] args)  {
 		Scanner scan =null;
 		try {
 		scan = new Scanner(System.in);
