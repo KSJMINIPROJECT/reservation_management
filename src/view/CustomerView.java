@@ -8,9 +8,8 @@ import model.CustomerDTO;
 
 public class CustomerView {
 	
-	public static boolean customerView() throws InputMismatchException {
+	public static boolean customerView(Scanner scan) throws InputMismatchException {
 		Controller controller = Controller.getInstance();
-		Scanner scan =new Scanner(System.in);
 		String customerId;
 		String phoneNum;
 		String customerName;
