@@ -1,10 +1,6 @@
 package controller;
 
 import java.sql.Date;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import dao.CustomerDAO;
 import exception.NotExistException;
 import model.CustomerDTO;
 import model.ReservationDTO;
@@ -41,7 +37,7 @@ public interface ControllerInterface {
 	// 모든 예약 현황 조회
 	public void allReservation();
 	// 특정 예약 현황 조회
-	public boolean selectReservation(int reservationId);
+	public ReservationDTO selectReservation(int reservationId);
 	// 예약 추가
 	public void addReservation(ReservationDTO newReservation);
 	// 에약 정보 수정

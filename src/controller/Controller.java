@@ -153,14 +153,27 @@ public class Controller implements ControllerInterface{
 	}
 	@Override
 	//빈방 조회(예약 시작, 예약 종료) 기준으로 조회
-		public void searchEmptyRoom(Date reservationStartDate,Date reservationEndDate) throws NotExistException {
-			try {
-				EndView.printAllData(reservation.searchEmptyRoom(reservationStartDate, reservationEndDate));
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+	public void searchEmptyRoom(Date reservationStartDate,Date reservationEndDate)  {
+		try {
+			EndView.printAllData(reservation.searchEmptyRoom(reservationStartDate, reservationEndDate));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
 		}
+	}
+	// roomId로 빈방인지 체크
+	public boolean checkEmptyRoom(Date reservationStartDate,Date reservationEndDate,int roomId)  {
+		try {
+			reservation.checkEmptyRoom(reservationStartDate, reservationEndDate,roomId);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
+		}
+		return false;
+	}
 
 	
 	// Reservation Controller
@@ -174,15 +187,17 @@ public class Controller implements ControllerInterface{
 	}
 
 	@Override
-	public boolean selectReservation(int reservationId) {
+	public ReservationDTO selectReservation(int reservationId) {
+		ReservationDTO selectReservation = null;
 		try {
-			EndView.printOne(reservation.selectReservation(reservationId));
-			return true;
+			selectReservation = reservation.selectReservation(reservationId);
+			EndView.printOne(selectReservation);
+			return selectReservation;
 		}catch (SQLException e){
 			e.printStackTrace();
 		} catch (NotExistException e) {
 			EndView.failView(e.getMessage());
-		} return false;
+		} return selectReservation;
 	}
 
 	@Override
@@ -220,5 +235,15 @@ public class Controller implements ControllerInterface{
 			EndView.failView(e.getMessage());
 		}
 	}
+	public boolean checkHeadCount(int roomId, String customerId) {
+		try {
+			return reservation.checkHeadCount(roomId, customerId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NotExistException e) {
+			EndView.failView(e.getMessage());
+		}return false;
+	}
+	
 
 }

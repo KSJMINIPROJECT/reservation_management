@@ -9,7 +9,7 @@ import exception.NotExistException;
 import model.RoomDTO;
 
 public class RoomView {
-	public static boolean roomView() throws InputMismatchException, NotExistException{
+	public static boolean roomView() throws InputMismatchException{
 		Controller controller = Controller.getInstance();
 		Scanner scan = new Scanner(System.in);
 		int roomId;

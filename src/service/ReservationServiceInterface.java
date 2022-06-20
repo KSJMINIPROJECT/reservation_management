@@ -20,7 +20,7 @@ public interface ReservationServiceInterface {
 	
 	//빈방 검색
 //	public ArrayList<RoomDTO> selectEmptyRoom(Date date) throws SQLException;
-	public ArrayList<RoomDTO> searchEmptyRoom(Date reservationStartDate, Date reservationEndDate) throws SQLException;
+	public ArrayList<RoomDTO> searchEmptyRoom(Date reservationStartDate, Date reservationEndDate) throws SQLException, NotExistException;
 	
 	
 }
