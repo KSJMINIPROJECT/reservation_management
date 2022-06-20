@@ -22,13 +22,13 @@ public class StartView{
 			selectNum = scan.nextInt();
 			switch (selectNum) {
 			case 1:
-				check =CustomerView.customerView();
+				check =CustomerView.customerView(scan);
 				break;
 			case 2:
-				check=RoomView.roomView();
+				check=RoomView.roomView(scan);
 				break;
 			case 3:
-				check=ReservationView.reservationView();
+				check=ReservationView.reservationView(scan);
 				break;
 			case 4:
 				check =false;

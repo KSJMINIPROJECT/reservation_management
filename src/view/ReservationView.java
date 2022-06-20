@@ -11,10 +11,9 @@ import model.RoomDTO;
 import service.ReservationService;
 
 public class ReservationView {
-	public static boolean reservationView() throws InputMismatchException {
+	public static boolean reservationView(Scanner scan) throws InputMismatchException {
 			Controller controller = Controller.getInstance();
 			ReservationDTO reservation = null;
-			Scanner scan = new Scanner(System.in);
 			int roomId;
 			int reservationId;
 			String customerId;

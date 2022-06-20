@@ -9,9 +9,8 @@ import exception.NotExistException;
 import model.RoomDTO;
 
 public class RoomView {
-	public static boolean roomView() throws InputMismatchException{
+	public static boolean roomView(Scanner scan) throws InputMismatchException{
 		Controller controller = Controller.getInstance();
-		Scanner scan = new Scanner(System.in);
 		int roomId;
 		int maxCapacity;
 		String price;
